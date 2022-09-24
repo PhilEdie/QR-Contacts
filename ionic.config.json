@@ -1,0 +1,7 @@
+{
+  "name": "QRAppReact",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react"
+}
