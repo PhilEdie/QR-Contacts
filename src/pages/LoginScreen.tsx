@@ -2,7 +2,7 @@
 import { useCallback, useState } from 'react';
 import { loginUser } from "../Authentication.js";
 import { auth } from "../firebase.config.js";
-import { IonButton, IonContent, IonHeader, IonInput, IonItem, IonItemDivider, IonLabel, IonPage, IonTitle, IonToolbar } from '@ionic/react';
+import { IonButton, IonContent, IonHeader, IonInput, IonItem, IonItemDivider, IonLabel, IonList, IonPage, IonTitle, IonToolbar } from '@ionic/react';
 import { Redirect, useHistory } from 'react-router';
 
 
@@ -74,26 +74,25 @@ const LoginScreen = () => {
                 </IonToolbar>
             </IonHeader>
             <IonContent>
-
-                <IonItemDivider>
+                <IonList>
                     <IonItem>
                         <IonLabel position="stacked">Email</IonLabel>
                         <IonInput value={email} type={"email"} required={true} onIonChange={e => setEmail(e.detail.value!)}></IonInput>
                     </IonItem>
-                </IonItemDivider>
-                <IonItemDivider>
+
                     <IonItem>
                         <IonLabel position="stacked">Password</IonLabel>
                         <IonInput value={password} type={"password"} required={true} onIonChange={e => setPassword(e.detail.value!)}></IonInput>
                     </IonItem>
-                </IonItemDivider>
-                <IonItemDivider>
-                    <IonButton expand="block" type="submit" onClick={() => handleSubmit()}>Submit</IonButton>
-                </IonItemDivider>
-                <IonItemDivider>
-                    <IonLabel position="stacked">Don't have an account?</IonLabel>
-                    <IonButton expand="block" onClick={() => history.push('/register')}>Register</IonButton>
-                </IonItemDivider>
+
+                    <IonItem>
+                        <IonButton expand="block" type="submit" onClick={() => handleSubmit()}>Submit</IonButton>
+                    </IonItem>
+                    <IonItem>
+                        <IonLabel position="stacked">Don't have an account?</IonLabel>
+                        <IonButton expand="block" onClick={() => history.push('/register')}>Register</IonButton>
+                    </IonItem>
+                </IonList>
             </IonContent>
         </IonPage>
     );

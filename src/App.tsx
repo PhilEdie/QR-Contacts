@@ -12,7 +12,6 @@ import {
 import { IonReactRouter } from '@ionic/react-router';
 import { ellipse, square, triangle } from 'ionicons/icons';
 import QRScreen from './pages/QRScreen';
-import SettingsController from './pages/SettingsController';
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';

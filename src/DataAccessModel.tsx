@@ -43,18 +43,31 @@ export const dbKeys = {
     firstName: "name",
     surname: "surname",
     email: "email",
-    dateOfBirth: "dateOfBirth",
     phoneNumber: "phoneNumber",
-    address: "address"
+    address: "address",
+    locality: "locality",
+    region: "region",
+    postalCode: "postalCode",
+    country: "country",
+    website: "website"
 }
+
 
 export const createProfile = async () => {
     if (auth.currentUser === null) {
         throw new Error("Cannot create profile. User is not signed in.");
     }
     await setDoc(getDocRef(), {
-        name: auth!.currentUser!.displayName,
-        email: auth!.currentUser!.email
+        firstName: "",
+        surname: "",
+        email: auth!.currentUser!.email,
+        phoneNumber: "",
+        address: "",
+        locality: "",
+        region: "",
+        postalCode: "",
+        country: "",
+        website: ""
     });
 }
 
@@ -63,5 +76,5 @@ export const fetchDataForUser = (uid: string) => {
 }
 
 export const fetchDataAndConvertToContactObject = async (uid: string) => {
-
+    var data = fetchDataForUser(uid);
 }
