@@ -4,7 +4,6 @@
 
 import { arrayUnion, doc, getDoc, increment, updateDoc, setDoc } from "firebase/firestore";
 import { auth, db } from './firebase.config';
-import { items } from "./Items.json";
 
 
 export const getDocRef = () => {
@@ -36,10 +35,6 @@ export const getValueInField = async (field) => {
     return docSnap.data()[field];
 }
 
-export const unequipItem = async (itemSlotName) => {
-    await updateValueInField(itemSlotName, items.none);
-}
-
 export const dbKeys = {
     firstName: "name",
     surname: "surname",
@@ -47,7 +42,6 @@ export const dbKeys = {
     dateOfBirth: "dateOfBirth",
     phoneNumber: "phoneNumber",
     address: "address"
-
 }
 
 export const createProfile = async () => {
@@ -56,4 +50,8 @@ export const createProfile = async () => {
         name: name,
         email: auth.currentUser.email
     });
+}
+
+export const fetchDataForUser = (uid) => {
+    return doc(db, 'users', uid);
 }

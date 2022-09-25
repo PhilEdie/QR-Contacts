@@ -3,11 +3,13 @@ import { useCallback, useState } from 'react';
 import { loginUser } from "../Authentication.js";
 import { auth } from "../firebase.config.js";
 import { IonButton, IonContent, IonHeader, IonInput, IonItem, IonItemDivider, IonLabel, IonPage, IonTitle, IonToolbar } from '@ionic/react';
+import { Redirect, useHistory } from 'react-router';
 
 
 const LoginScreen = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const history = useHistory();
 
     // Resets fields when screen moves in focus.
     // useFocusEffect(
@@ -17,20 +19,21 @@ const LoginScreen = () => {
     //     }, [])
     // );
 
-    const philLogin = async () => {
-        await loginUser("ediephil@gmail.com", "ExamplePass1*");
-        // If successfully logged in, go to home screen.
-        if (auth.currentUser !== null) {
-            if (auth.currentUser !== null) {
-                //navigation.navigate("HomeScreen");
-            }
-        };
-    }
+    // const philLogin = async () => {
+    //     await loginUser("ediephil@gmail.com", "ExamplePass1*");
+    //     // If successfully logged in, go to home screen.
+    //     if (auth.currentUser !== null) {
+    //         if (auth.currentUser !== null) {
+    //             //navigation.navigate("HomeScreen");
+    //         }
+    //     };
+    // }
 
 
     const handleSubmit = async () => {
         await loginUser(email, password).then(() => {
             //navigation.navigate("HomeScreen");
+            history.push('/home');
             alert("Sign in successful.");
         }).catch((error: any) => {
             console.log(error);
