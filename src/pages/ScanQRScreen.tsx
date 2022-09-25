@@ -13,7 +13,7 @@ const ScanQRScreen = () => {
 
     const openScanner = async () => {
         await BarcodeScanner.scan().then((uid) => {
-            fetchDataForUser(uid);
+
         });
     };
 

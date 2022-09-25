@@ -49,3 +49,7 @@ export const logoutUser = async () => {
 export const resetPassword = async (email) => {
     sendPasswordResetEmail(auth, email);
 }
+
+export const uid = () => {
+    return auth.currentUser.uid;
+}

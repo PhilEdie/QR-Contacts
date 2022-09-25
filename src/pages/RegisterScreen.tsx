@@ -1,5 +1,6 @@
 import { IonButton, IonContent, IonHeader, IonInput, IonItem, IonItemDivider, IonLabel, IonPage, IonTitle, IonToolbar } from '@ionic/react';
 import { useState } from 'react';
+import { useHistory } from 'react-router';
 import { registerUser } from "../Authentication";
 import { validInputs } from "../ValidateLogin"
 
@@ -10,6 +11,7 @@ const RegisterScreen = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
+    const history = useHistory();
 
 
 
@@ -75,6 +77,10 @@ const RegisterScreen = () => {
                 </IonItemDivider>
                 <IonItemDivider>
                     <IonButton expand="block" type="submit" onClick={() => handleSubmit()}>Submit</IonButton>
+                </IonItemDivider>
+                <IonItemDivider>
+                    <IonLabel position="stacked">Already have an account?</IonLabel>
+                    <IonButton expand="block" onClick={() => history.push('/login')}>Login</IonButton>
                 </IonItemDivider>
             </IonContent>
         </IonPage>

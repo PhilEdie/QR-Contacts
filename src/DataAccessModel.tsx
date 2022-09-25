@@ -8,19 +8,23 @@ import { auth, db } from './firebase.config';
 
 export const getDocRef = () => {
     const user = auth.currentUser;
+    if (user === null) {
+        throw new Error("Cannot get DocRef. User isn't signed in.");
+    }
     return doc(db, 'users', user.uid);
 }
 
-export const incrementValueInField = async (field, incrementValue = 1) => {
+
+export const incrementValueInField = async (field: string, incrementValue = 1) => {
     await updateDoc(getDocRef(), { [`${field}`]: increment(incrementValue) });
 }
 
-export const updateValueInField = async (field, newValue) => {
+export const updateValueInField = async (field: string, newValue: any) => {
     await updateDoc(getDocRef(), { [`${field}`]: newValue });
 }
 
 
-export const addValueToArray = async (field, valueToAdd) => {
+export const addValueToArray = async (field: string, valueToAdd: any) => {
     await updateDoc(getDocRef(), { [`${field}`]: arrayUnion(valueToAdd) });
 }
 
@@ -30,9 +34,9 @@ export const get = async () => {
     return docSnap;
 }
 
-export const getValueInField = async (field) => {
+export const getValueInField = async (field: string) => {
     const docSnap = await get();
-    return docSnap.data()[field];
+    return docSnap.data()![field];
 }
 
 export const dbKeys = {
@@ -45,13 +49,19 @@ export const dbKeys = {
 }
 
 export const createProfile = async () => {
-    const name = auth.currentUser.displayName;
+    if (auth.currentUser === null) {
+        throw new Error("Cannot create profile. User is not signed in.");
+    }
     await setDoc(getDocRef(), {
-        name: name,
-        email: auth.currentUser.email
+        name: auth!.currentUser!.displayName,
+        email: auth!.currentUser!.email
     });
 }
 
-export const fetchDataForUser = (uid) => {
+export const fetchDataForUser = (uid: string) => {
     return doc(db, 'users', uid);
+}
+
+export const fetchDataAndConvertToContactObject = async (uid: string) => {
+
 }

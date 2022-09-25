@@ -90,6 +90,10 @@ const LoginScreen = () => {
                 <IonItemDivider>
                     <IonButton expand="block" type="submit" onClick={() => handleSubmit()}>Submit</IonButton>
                 </IonItemDivider>
+                <IonItemDivider>
+                    <IonLabel position="stacked">Don't have an account?</IonLabel>
+                    <IonButton expand="block" onClick={() => history.push('/register')}>Register</IonButton>
+                </IonItemDivider>
             </IonContent>
         </IonPage>
     );

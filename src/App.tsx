@@ -12,7 +12,7 @@ import {
 import { IonReactRouter } from '@ionic/react-router';
 import { ellipse, square, triangle } from 'ionicons/icons';
 import QRScreen from './pages/QRScreen';
-import SettingsScreen from './pages/SettingsScreen';
+import SettingsController from './pages/SettingsController';
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
@@ -55,6 +55,12 @@ const App: React.FC = () => (
         render={(props) => {
           return (auth.currentUser !== null) ? <HomeScreen /> : <LoginScreen />
         }}>
+      </Route>
+      <Route exact path="/register">
+        <RegisterScreen />
+      </Route>
+      <Route exact path="/login">
+        <LoginScreen />
       </Route>
     </IonReactRouter>
   </IonApp>

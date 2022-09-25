@@ -12,13 +12,11 @@ import {
 import { IonReactRouter } from '@ionic/react-router';
 import { qrCodeOutline, settingsOutline, scanOutline } from 'ionicons/icons';
 import QRScreen from './QRScreen';
-import SettingsScreen from './SettingsScreen';
+import SettingsController from './SettingsController';
 import ScanQRScreen from "./ScanQRScreen";
 
 
 const HomeScreen = () => {
-
-
     return (
         <IonPage>
             <IonReactRouter>
@@ -30,7 +28,7 @@ const HomeScreen = () => {
                             <QRScreen />
                         </Route>
                         <Route exact path="/settings">
-                            <SettingsScreen />
+                            <SettingsController />
                         </Route>
                         <Route exact path="/scan">
                             <ScanQRScreen />

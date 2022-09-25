@@ -2,10 +2,11 @@ import { IonButton, IonContent, IonHeader, IonPage, IonText, IonTitle, IonToolba
 import './QRScreen.css';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 import { useState } from 'react';
+import { uid } from '../Authentication';
 
 const QRScreen: React.FC = () => {
 
-  const [toEncode, setToEncode] = useState("Hello");
+  const [toEncode, setToEncode] = useState(uid);
 
   const createCode = () => {
     BarcodeScanner.encode(BarcodeScanner.Encode.TEXT_TYPE, toEncode)
