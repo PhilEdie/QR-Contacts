@@ -11,30 +11,10 @@ const LoginScreen = () => {
     const [password, setPassword] = useState('');
     const history = useHistory();
 
-    // Resets fields when screen moves in focus.
-    // useFocusEffect(
-    //     useCallback(() => {
-    //         setEmail('');
-    //         setPassword('');
-    //     }, [])
-    // );
-
-    // const philLogin = async () => {
-    //     await loginUser("ediephil@gmail.com", "ExamplePass1*");
-    //     // If successfully logged in, go to home screen.
-    //     if (auth.currentUser !== null) {
-    //         if (auth.currentUser !== null) {
-    //             //navigation.navigate("HomeScreen");
-    //         }
-    //     };
-    // }
-
-
     const handleSubmit = async () => {
         await loginUser(email, password).then(() => {
             //navigation.navigate("HomeScreen");
             history.push('/home');
-            alert("Sign in successful.");
         }).catch((error: any) => {
             console.log(error);
 
@@ -42,7 +22,6 @@ const LoginScreen = () => {
                 alert("Please verify your account through the verification email.");
                 return;
             }
-
             switch (error.code) {
                 case 'auth/user-not-found':
                     alert('Invalid credentials. Please try again.');
@@ -85,13 +64,11 @@ const LoginScreen = () => {
                         <IonInput value={password} type={"password"} required={true} onIonChange={e => setPassword(e.detail.value!)}></IonInput>
                     </IonItem>
 
-                    <IonItem>
-                        <IonButton expand="block" type="submit" onClick={() => handleSubmit()}>Submit</IonButton>
-                    </IonItem>
-                    <IonItem>
-                        <IonLabel position="stacked">Don't have an account?</IonLabel>
-                        <IonButton expand="block" onClick={() => history.push('/register')}>Register</IonButton>
-                    </IonItem>
+
+                    <IonButton expand="block" type="submit" onClick={() => handleSubmit()}>Submit</IonButton>
+
+                    <IonLabel position="stacked">Don't have an account?</IonLabel>
+                    <IonButton expand="block" onClick={() => history.push('/register')}>Register</IonButton>
                 </IonList>
             </IonContent>
         </IonPage>

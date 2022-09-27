@@ -37,7 +37,7 @@ export const get = async () => {
 }
 
 export const getFromUid = async (uid: string) => {
-    return doc(db, 'users', uid);
+    return getDoc(doc(db, 'users', uid));
 }
 
 
@@ -124,6 +124,7 @@ export const createContactFromScan = async (uid: string) => {
 
     // Save the contact.
     contact.save()
-        .then(() => alert('Contact saved!'))
         .catch((error: any) => console.error('Error saving contact.', error));
+
+    return docSnap;
 }

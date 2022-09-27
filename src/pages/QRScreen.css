@@ -1,0 +1,19 @@
+.qr {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+    text-align: center;
+}
+
+.vcs {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.hcs {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}

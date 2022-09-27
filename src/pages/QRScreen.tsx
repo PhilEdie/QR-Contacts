@@ -1,21 +1,10 @@
-import { IonButton, IonContent, IonHeader, IonPage, IonText, IonTitle, IonToolbar } from '@ionic/react';
+import { IonCard, IonCardContent, IonCardSubtitle, IonContent, IonHeader, IonPage, IonText, IonTitle, IonToolbar } from '@ionic/react';
+import { QRCodeCanvas } from 'qrcode.react';
+import { auth } from '../firebase.config';
 import './QRScreen.css';
-import { BarcodeScanner } from '@ionic-native/barcode-scanner';
-import { useState } from 'react';
-import { uid } from '../Authentication';
+
 
 const QRScreen: React.FC = () => {
-
-  const [toEncode, setToEncode] = useState(uid);
-
-  const createCode = () => {
-    BarcodeScanner.encode(BarcodeScanner.Encode.TEXT_TYPE, toEncode)
-      .then(data => {
-        alert(data);
-      }, error => {
-        console.log("Error : " + error);
-      });
-  };
 
   return (
     <IonPage>
@@ -30,10 +19,20 @@ const QRScreen: React.FC = () => {
             <IonTitle size="large">My QR Code</IonTitle>
           </IonToolbar>
         </IonHeader>
-        <IonButton onClick={() => createCode()}>View</IonButton>
+        <IonCard>
+
+          <IonCardContent >
+            <QRCodeCanvas value={auth!.currentUser!.uid!} includeMargin={true} size={380} className={"qr"} />
+            <IonText className={"qr"}>{auth!.currentUser!.uid!}</IonText>
+          </IonCardContent>
+        </IonCard>
+
       </IonContent>
     </IonPage>
   );
 };
 
 export default QRScreen;
+
+
+

@@ -1,12 +1,10 @@
-import { IonButton, IonContent, IonHeader, IonInput, IonItem, IonItemDivider, IonLabel, IonList, IonPage, IonProgressBar, IonText, IonTitle, IonToolbar, withIonLifeCycle } from '@ionic/react';
-import { useEffect, useState } from 'react';
-import ExploreContainer from '../components/ExploreContainer';
-import { dbKeys, get, getDocRef } from '../DataAccessModel';
-import { createContext } from 'react';
+import { IonButton, IonContent, IonHeader, IonInput, IonItem, IonLabel, IonList, IonPage, IonProgressBar, IonText, IonTitle, IonToolbar, withIonLifeCycle } from '@ionic/react';
 import { setDoc } from 'firebase/firestore';
+import { useEffect, useState } from 'react';
+import { dbKeys, get, getDocRef } from '../DataAccessModel';
 import { auth } from '../firebase.config';
 
-const SettingsController: React.FC = () => {
+const SettingsScreen: React.FC = () => {
 
   const [firstName, setFirstName] = useState("");
   const [surname, setSurname] = useState("");
@@ -67,11 +65,11 @@ const SettingsController: React.FC = () => {
     })
   }
 
-  if (state === "loading") {
+  if (state == "loading") {
     return (
       <IonProgressBar type="indeterminate"></IonProgressBar>
     )
-  } else if (state === "error") {
+  } else if (state == "error") {
     return (
       <IonText>An error occured.</IonText>
     )
@@ -135,13 +133,11 @@ const SettingsController: React.FC = () => {
             <IonLabel position="stacked">Website</IonLabel>
             <IonInput value={website} type={"text"} required={true} onIonChange={e => setWebsite(e.detail.value!)}></IonInput>
           </IonItem>
-          <IonItem>
-            <IonButton expand="block" type="submit" onClick={() => handleSubmit()}>Submit</IonButton>
-          </IonItem>
+          <IonButton expand="block" type="submit" onClick={() => handleSubmit()}>Submit</IonButton>
         </IonList>
       </IonContent>
     </IonPage>
   );
 };
 
-export default withIonLifeCycle(SettingsController);
+export default withIonLifeCycle(SettingsScreen);
