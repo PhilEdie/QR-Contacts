@@ -14,6 +14,8 @@ import { qrCodeOutline, settingsOutline, scanOutline } from 'ionicons/icons';
 import QRScreen from './QRScreen';
 import SettingsScreen from './SettingsScreen';
 import ScanQRScreen from "./ScanQRScreen";
+import { auth } from "../firebase.config";
+import LoginScreen from "./LoginScreen";
 
 
 const HomeScreen = () => {
@@ -22,8 +24,7 @@ const HomeScreen = () => {
             <IonReactRouter>
                 <IonTabs>
                     <IonRouterOutlet>
-                        <Redirect exact path="/home" to="/QR" />
-                        <Redirect exact path="/" to="/QR" />
+                        {auth.currentUser !== null ? <Redirect exact path="/" to="/login" /> : <Redirect exact path="/" to="/QR" />}
                         <Route exact path="/QR">
                             <QRScreen />
                         </Route>

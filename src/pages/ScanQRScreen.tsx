@@ -1,5 +1,5 @@
 import { BarcodeScanner } from "@ionic-native/barcode-scanner";
-import { IonButton, IonContent, IonHeader, IonIcon, IonPage, IonProgressBar, IonTitle, IonToolbar } from "@ionic/react";
+import { IonButton, IonContent, IonHeader, IonIcon, IonItem, IonPage, IonProgressBar, IonText, IonTitle, IonToolbar } from "@ionic/react";
 import { DocumentData, DocumentSnapshot } from "firebase/firestore";
 import { alertCircle, checkmarkCircle } from "ionicons/icons";
 import { useState } from "react";
@@ -29,6 +29,7 @@ const ScanQRScreen = () => {
             }).catch((error) => {
                 console.error(error);
                 setState("error");
+                alert("An error occured.");
             });
         });
     };
@@ -43,6 +44,13 @@ const ScanQRScreen = () => {
                 </IonToolbar>
             </IonHeader>
             <IonContent fullscreen>
+                <IonItem>
+                    <IonText>
+                        Using your phone camera, scan another user's QR code. Their contact details
+                        will be automatically saved to your phone contacts list.
+                    </IonText>
+                </IonItem>
+
                 {state === "ready" && <IonButton onClick={getUidFromQRCode} expand="block">Scan QR Code</IonButton>}
                 {state === "loading" && <IonProgressBar type="indeterminate"></IonProgressBar>}
                 {state === "success" &&

@@ -35,6 +35,7 @@ import LoginScreen from './pages/LoginScreen';
 import RegisterScreen from './pages/RegisterScreen';
 import { auth } from './firebase.config';
 import HomeScreen from './pages/HomeScreen';
+import ResetPasswordScreen from './pages/ResetPasswordScreen';
 
 setupIonicReact();
 
@@ -48,18 +49,17 @@ const App: React.FC = () => (
           return (auth.currentUser !== null) ? <HomeScreen /> : <LoginScreen />
         }}>
       </Route>
-      <Route
-        exact
-        path="/home"
-        render={(props) => {
-          return (auth.currentUser !== null) ? <HomeScreen /> : <LoginScreen />
-        }}>
+      <Route exact path="/QR">
+        <HomeScreen />
       </Route>
       <Route exact path="/register">
         <RegisterScreen />
       </Route>
       <Route exact path="/login">
         <LoginScreen />
+      </Route>
+      <Route exact path="/reset-password">
+        <ResetPasswordScreen />
       </Route>
     </IonReactRouter>
   </IonApp>

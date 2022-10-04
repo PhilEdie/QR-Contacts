@@ -1,6 +1,8 @@
 import { IonButton, IonContent, IonHeader, IonInput, IonItem, IonLabel, IonList, IonPage, IonProgressBar, IonText, IonTitle, IonToolbar, withIonLifeCycle } from '@ionic/react';
 import { setDoc } from 'firebase/firestore';
 import { useEffect, useState } from 'react';
+import { useHistory } from 'react-router';
+import { logoutUser } from '../Authentication';
 import { dbKeys, get, getDocRef } from '../DataAccessModel';
 import { auth } from '../firebase.config';
 
@@ -17,7 +19,7 @@ const SettingsScreen: React.FC = () => {
   const [country, setCountry] = useState("");
   const [website, setWebsite] = useState("");
   const [state, setState] = useState("loading");
-
+  const history = useHistory();
 
   useEffect(() => {
     get().then((_docSnap) => {
@@ -67,7 +69,17 @@ const SettingsScreen: React.FC = () => {
 
   if (state == "loading") {
     return (
-      <IonProgressBar type="indeterminate"></IonProgressBar>
+      <IonPage>
+        <IonHeader>
+          <IonToolbar>
+            <IonTitle>Settings</IonTitle>
+          </IonToolbar>
+        </IonHeader>
+        <IonContent>
+          <IonProgressBar type="indeterminate"></IonProgressBar>
+        </IonContent>
+      </IonPage>
+
     )
   } else if (state == "error") {
     return (
@@ -90,6 +102,9 @@ const SettingsScreen: React.FC = () => {
           </IonToolbar>
         </IonHeader>
         <IonList>
+          <IonToolbar>
+            <IonTitle size="large">Update Contact Details</IonTitle>
+          </IonToolbar>
           <IonItem>
             <IonLabel position="stacked">Email</IonLabel>
             <IonInput value={email} type={"email"} required={true} onIonChange={e => setSurname(e.detail.value!)} disabled></IonInput>
@@ -135,6 +150,19 @@ const SettingsScreen: React.FC = () => {
           </IonItem>
           <IonButton expand="block" type="submit" onClick={() => handleSubmit()}>Submit</IonButton>
         </IonList>
+        <IonButton
+          onClick={() => {
+            setState('loading');
+            logoutUser().then(() => {
+              setState('');
+              history.replace('/');
+            }).catch((error) => {
+              setState('');
+              console.log(error);
+              alert("Something went wrong!");
+            });
+          }} expand="block"
+        >Logout</IonButton>
       </IonContent>
     </IonPage>
   );
