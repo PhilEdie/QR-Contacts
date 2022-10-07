@@ -18,7 +18,7 @@ export const registerUser = async (name: string, email: string, password: string
         displayName: name
     });
     await sendEmailVerification(auth!.currentUser!);
-    await createProfile();
+    await createProfile(name);
     await signOut(auth);
 }
 

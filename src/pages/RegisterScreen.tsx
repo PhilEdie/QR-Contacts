@@ -1,4 +1,4 @@
-import { IonButton, IonContent, IonHeader, IonInput, IonItem, IonItemDivider, IonLabel, IonList, IonPage, IonTitle, IonToolbar } from '@ionic/react';
+import { IonButton, IonContent, IonHeader, IonInput, IonItem, IonItemDivider, IonLabel, IonList, IonPage, IonProgressBar, IonTitle, IonToolbar } from '@ionic/react';
 import { useState } from 'react';
 import { useHistory } from 'react-router';
 import { Link } from 'react-router-dom';
@@ -7,29 +7,29 @@ import { validInputs } from "../ValidateLogin"
 
 
 const RegisterScreen = () => {
-    const [firstName, setFirstName] = useState('');
-    //const [surname, setSurname] = useState('');
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
+    const [firstName, setFirstName] = useState("");
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState('');
-    const history = useHistory();
-
-
+    const [state, setState] = useState("");
 
     const handleSubmit = () => {
         if (!validInputs(firstName, email, password, confirmPassword)) {
             return;
         }
-
+        setState("loading");
         registerUser(firstName, email, password).then(() => {
             setFirstName('');
             //setSurname('');
             setEmail('');
             setPassword('');
             setConfirmPassword('');
+            setState("");
             alert("Verification email sent to " + email);
+
         }).catch((error) => {
             console.log(error);
+            setState("");
             switch (error.code) {
                 case 'auth/email-already-in-use':
                     alert('Email already in use. Please use another email.');
@@ -52,6 +52,7 @@ const RegisterScreen = () => {
                 </IonToolbar>
             </IonHeader>
             <IonContent>
+                {state === "loading" ? <IonProgressBar type="indeterminate"></IonProgressBar> : null}
                 <IonList>
                     <IonItem>
                         <IonLabel position="stacked">First Name</IonLabel>

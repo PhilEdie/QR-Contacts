@@ -42,21 +42,17 @@ setupIonicReact();
 const App: React.FC = () => (
   <IonApp>
     <IonReactRouter>
-      <Route
-        exact
-        path="/"
-        render={(props) => {
-          return (auth.currentUser !== null) ? <HomeScreen /> : <LoginScreen />
-        }}>
-      </Route>
-      <Route exact path="/QR">
-        <HomeScreen />
-      </Route>
-      <Route exact path="/register">
-        <RegisterScreen />
-      </Route>
       <Route exact path="/login">
         <LoginScreen />
+      </Route>
+      <Redirect exact from="/" to="/login" />
+      <Route exact path="/home"
+        render={(props) => {
+          return auth.currentUser !== null ? <HomeScreen {...props} /> : <LoginScreen />;
+        }}
+      />
+      <Route exact path="/register">
+        <RegisterScreen />
       </Route>
       <Route exact path="/reset-password">
         <ResetPasswordScreen />

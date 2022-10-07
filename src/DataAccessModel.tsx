@@ -47,7 +47,7 @@ export const getValueInField = async (field: string) => {
 }
 
 export const dbKeys = {
-    firstName: "name",
+    firstName: "firstName",
     surname: "surname",
     email: "email",
     phoneNumber: "phoneNumber",
@@ -60,12 +60,12 @@ export const dbKeys = {
 }
 
 
-export const createProfile = async () => {
+export const createProfile = async (name: string) => {
     if (auth.currentUser === null) {
         throw new Error("Cannot create profile. User is not signed in.");
     }
     await setDoc(getDocRef(), {
-        firstName: "",
+        firstName: name,
         surname: "",
         email: auth!.currentUser!.email,
         phoneNumber: "",

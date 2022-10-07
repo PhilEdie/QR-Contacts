@@ -1,12 +1,12 @@
 import { IonButton, IonContent, IonHeader, IonInput, IonItem, IonLabel, IonList, IonPage, IonProgressBar, IonText, IonTitle, IonToolbar, withIonLifeCycle } from '@ionic/react';
 import { setDoc } from 'firebase/firestore';
 import { useEffect, useState } from 'react';
-import { useHistory } from 'react-router';
+import { RouteComponentProps, useHistory } from 'react-router';
 import { logoutUser } from '../Authentication';
 import { dbKeys, get, getDocRef } from '../DataAccessModel';
 import { auth } from '../firebase.config';
 
-const SettingsScreen: React.FC = () => {
+const SettingsScreen: React.FC<RouteComponentProps> = ({ history }) => {
 
   const [firstName, setFirstName] = useState("");
   const [surname, setSurname] = useState("");
@@ -19,7 +19,7 @@ const SettingsScreen: React.FC = () => {
   const [country, setCountry] = useState("");
   const [website, setWebsite] = useState("");
   const [state, setState] = useState("loading");
-  const history = useHistory();
+
 
   useEffect(() => {
     get().then((_docSnap) => {
@@ -164,7 +164,7 @@ const SettingsScreen: React.FC = () => {
             setState("loading");
             logoutUser().then(() => {
               setState("");
-              history.push("/login");
+              history.replace("/login");
             }).catch((error) => {
               setState("");
               console.log(error);

@@ -16,9 +16,8 @@ const LoginScreen = () => {
     const handleSubmit = async () => {
         setState('loading');
         await loginUser(email, password).then(() => {
-            //navigation.navigate("HomeScreen");
             setState('');
-            history.push('/QR');
+            history.push('/home');
         }).catch((error: any) => {
             setState('');
             console.log(error);

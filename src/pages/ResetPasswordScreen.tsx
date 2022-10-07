@@ -1,4 +1,4 @@
-import { IonButton, IonContent, IonHeader, IonInput, IonItem, IonLabel, IonPage, IonTitle, IonToolbar } from '@ionic/react';
+import { IonButton, IonContent, IonHeader, IonInput, IonItem, IonLabel, IonPage, IonProgressBar, IonTitle, IonToolbar } from '@ionic/react';
 import { useState } from 'react';
 import { useHistory } from 'react-router';
 import { Link } from 'react-router-dom';
@@ -7,19 +7,21 @@ import { validEmail } from '../ValidateLogin';
 
 
 const ResetPasswordScreen = () => {
-    const [email, setEmail] = useState('');
-    const history = useHistory();
+    const [email, setEmail] = useState("");
+    const [state, setState] = useState("");
 
     const handleSubmit = async () => {
         if (!validEmail(email)) {
             alert("Please enter a valid email address.");
             return;
         }
-
+        setState("loading");
         resetPassword(email).then(() => {
             setEmail('');
+            setState("");
             alert("A password reset email has been sent to " + email);
         }).catch((error) => {
+            setState("");
             alert('Something went wrong!');
             console.log(error);
         });
@@ -33,6 +35,7 @@ const ResetPasswordScreen = () => {
                 </IonToolbar>
             </IonHeader>
             <IonContent>
+                {state === "loading" ? <IonProgressBar type="indeterminate"></IonProgressBar> : null}
                 <IonItem>
                     <IonLabel position="stacked">Email</IonLabel>
                     <IonInput value={email} type={"email"} required={true} onIonChange={e => setEmail(e.detail.value!)}></IonInput>

@@ -7,40 +7,41 @@ import {
 } from "@ionic/react";
 import { IonReactRouter } from '@ionic/react-router';
 import { qrCodeOutline, scanOutline, settingsOutline } from 'ionicons/icons';
-import { Redirect, Route } from 'react-router-dom';
+import { Redirect, Route, RouteComponentProps } from 'react-router-dom';
 import { auth } from "../firebase.config";
 import QRScreen from './QRScreen';
 import ScanQRScreen from "./ScanQRScreen";
 import SettingsScreen from './SettingsScreen';
 
 
-const HomeScreen = () => {
+const HomeScreen: React.FC<RouteComponentProps> = ({ history, match }) => {
     return (
         <IonPage>
             <IonReactRouter>
                 <IonTabs>
                     <IonRouterOutlet>
-                        {auth.currentUser !== null ? <Redirect exact path="/" to="/login" /> : <Redirect exact path="/" to="/QR" />}
-                        <Route exact path="/QR">
+                        <Redirect exact from={match.url} to={`${match.url}/QR`} />
+                        <Route exact path={`${match.url}/QR`}>
                             <QRScreen />
                         </Route>
-                        <Route exact path="/settings">
-                            <SettingsScreen />
+                        <Route exact path={`${match.url}/settings`}>
+                            <SettingsScreen history={history} />
                         </Route>
-                        <Route exact path="/scan">
+                        <Route exact path={`${match.url}/scan`}>
                             <ScanQRScreen />
                         </Route>
+                        <Route render={() => <Redirect to={match.url} />} />
                     </IonRouterOutlet>
                     <IonTabBar slot="bottom">
-                        <IonTabButton tab="scan" href="/scan">
+                        <IonTabButton tab="scan" href={`${match.url}/scan`}>
                             <IonIcon icon={scanOutline} />
                             <IonLabel>Scan</IonLabel>
                         </IonTabButton>
-                        <IonTabButton tab="QR" href="/QR">
+                        <IonTabButton tab="QR" href={`${match.url}/QR`}>
                             <IonIcon icon={qrCodeOutline} />
                             <IonLabel>My QR Code</IonLabel>
                         </IonTabButton>
-                        <IonTabButton tab="settings" href="/settings">
+                        <IonTabButton tab="settings" href={`${match.url}/settings`}>
                             <IonIcon icon={settingsOutline} />
                             <IonLabel>Settings</IonLabel>
                         </IonTabButton>
