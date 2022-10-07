@@ -1,21 +1,17 @@
-import { IonPage } from "@ionic/react";
-import { Redirect, Route } from 'react-router-dom';
 import {
-    IonApp,
     IonIcon,
-    IonLabel,
-    IonRouterOutlet,
+    IonLabel, IonPage, IonRouterOutlet,
     IonTabBar,
     IonTabButton,
-    IonTabs,
-} from '@ionic/react';
+    IonTabs
+} from "@ionic/react";
 import { IonReactRouter } from '@ionic/react-router';
-import { qrCodeOutline, settingsOutline, scanOutline } from 'ionicons/icons';
-import QRScreen from './QRScreen';
-import SettingsScreen from './SettingsScreen';
-import ScanQRScreen from "./ScanQRScreen";
+import { qrCodeOutline, scanOutline, settingsOutline } from 'ionicons/icons';
+import { Redirect, Route } from 'react-router-dom';
 import { auth } from "../firebase.config";
-import LoginScreen from "./LoginScreen";
+import QRScreen from './QRScreen';
+import ScanQRScreen from "./ScanQRScreen";
+import SettingsScreen from './SettingsScreen';
 
 
 const HomeScreen = () => {

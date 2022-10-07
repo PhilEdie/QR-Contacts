@@ -2,7 +2,7 @@
  * Utility functions which are used to ensure registration and password reset fields are valid.
  */
 
-export const validInputs = (name, email, password, confirmPassword = password) => {
+export const validInputs = (name: string, email: string, password: string, confirmPassword = password) => {
 
     if (name == "") {
         alert('Please enter a name.');
@@ -60,7 +60,7 @@ export const validInputs = (name, email, password, confirmPassword = password) =
 
 
 // Help from: https://stackoverflow.com/questions/46155/how-can-i-validate-an-email-address-in-javascript
-export const validEmail = (email) => {
+export const validEmail = (email: string) => {
     return email
         .toLowerCase()
         .match(
@@ -68,7 +68,7 @@ export const validEmail = (email) => {
         );
 }
 
-export const validPassword = (password) => {
+export const validPassword = (password: string) => {
     return password.length >= 8 &&
         hasAtLeastOneNumber(password) &&
         hasAtLeastOneLowerCaseLetter(password) &&
@@ -77,19 +77,19 @@ export const validPassword = (password) => {
 }
 
 // Help from : https://www.the-art-of-web.com/javascript/validate-password/
-const hasAtLeastOneNumber = (password) => {
+const hasAtLeastOneNumber = (password: string) => {
     return /[0-9]/.test(password);
 }
 
-const hasAtLeastOneLowerCaseLetter = (password) => {
+const hasAtLeastOneLowerCaseLetter = (password: string) => {
     return /[a-z]/.test(password);
 }
 
-const hasAtLeastOneUpperCaseLetter = (password) => {
+const hasAtLeastOneUpperCaseLetter = (password: string) => {
     return /[A-Z]/.test(password);
 }
 
-const hasAtLeastOneSpecialCharacter = (password) => {
+const hasAtLeastOneSpecialCharacter = (password: string) => {
     return /[!@#$%^&*(),.?":{}|<>]/.test(password);
 }
 

@@ -83,7 +83,16 @@ const SettingsScreen: React.FC = () => {
     )
   } else if (state == "error") {
     return (
-      <IonText>An error occured.</IonText>
+      <IonPage>
+        <IonHeader>
+          <IonToolbar>
+            <IonTitle>Settings</IonTitle>
+          </IonToolbar>
+        </IonHeader>
+        <IonContent>
+          <IonText>An error occured.</IonText>
+        </IonContent>
+      </IonPage>
     )
   }
 
@@ -152,12 +161,12 @@ const SettingsScreen: React.FC = () => {
         </IonList>
         <IonButton
           onClick={() => {
-            setState('loading');
+            setState("loading");
             logoutUser().then(() => {
-              setState('');
-              history.replace('/');
+              setState("");
+              history.push("/login");
             }).catch((error) => {
-              setState('');
+              setState("");
               console.log(error);
               alert("Something went wrong!");
             });

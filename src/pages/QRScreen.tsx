@@ -1,4 +1,4 @@
-import { IonCard, IonCardContent, IonCardSubtitle, IonContent, IonHeader, IonPage, IonText, IonTitle, IonToolbar } from '@ionic/react';
+import { IonCard, IonCardContent, IonContent, IonHeader, IonPage, IonText, IonTitle, IonToolbar } from '@ionic/react';
 import { QRCodeCanvas } from 'qrcode.react';
 import { auth } from '../firebase.config';
 import './QRScreen.css';
@@ -20,7 +20,6 @@ const QRScreen: React.FC = () => {
           </IonToolbar>
         </IonHeader>
         <IonCard>
-
           <IonCardContent >
             <QRCodeCanvas value={auth!.currentUser!.uid!} includeMargin={true} size={380} className={"qr"} />
             <IonText className={"qr"}>{auth!.currentUser!.uid!}</IonText>

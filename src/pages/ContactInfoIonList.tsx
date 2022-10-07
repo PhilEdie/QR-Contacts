@@ -1,8 +1,7 @@
-import { IonButton, IonContent, IonHeader, IonInput, IonItem, IonLabel, IonList, IonPage, IonProgressBar, IonText, IonTitle, IonToolbar, withIonLifeCycle } from '@ionic/react';
-import { DocumentData, DocumentSnapshot, setDoc } from 'firebase/firestore';
+import { IonItem, IonLabel, IonList, IonText } from '@ionic/react';
+import { DocumentData, DocumentSnapshot } from 'firebase/firestore';
 import { useEffect, useState } from 'react';
-import { dbKeys, get, getDocRef } from '../DataAccessModel';
-import { auth } from '../firebase.config';
+import { dbKeys } from '../DataAccessModel';
 
 interface ContactInfoIonListProps {
   docSnap: DocumentSnapshot<DocumentData>

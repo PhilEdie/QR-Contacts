@@ -1,6 +1,6 @@
 
 import { useCallback, useState } from 'react';
-import { loginUser } from "../Authentication.js";
+import { loginUser } from "../Authentication";
 import { auth } from "../firebase.config.js";
 import { IonButton, IonContent, IonHeader, IonInput, IonItem, IonItemDivider, IonLabel, IonList, IonNavLink, IonPage, IonProgressBar, IonRouterLink, IonText, IonTitle, IonToolbar } from '@ionic/react';
 import { Redirect, useHistory } from 'react-router';
@@ -73,7 +73,6 @@ const LoginScreen = () => {
                     </IonItem>
 
                     <IonButton expand="block" type="submit" onClick={() => handleSubmit()}>Submit</IonButton>
-
 
 
                     <IonItem>
