@@ -3,7 +3,7 @@
  */
 
 import { arrayUnion, doc, getDoc, increment, updateDoc, setDoc } from "firebase/firestore";
-import { auth, db } from './firebase.config';
+import { auth, db } from '../firebase.config';
 import { Contacts, Contact, ContactField, ContactName, ContactAddress } from '@ionic-native/contacts';
 import { AndroidPermissions } from "@awesome-cordova-plugins/android-permissions";
 
@@ -78,12 +78,23 @@ export const createProfile = async (name: string) => {
     });
 }
 
-export const fetchDataForUser = (uid: string) => {
-    return doc(db, 'users', uid);
+export const updateContactInfo = async (email: string, firstName: string, surname: string, phoneNumber: string, address: string, locality: string, region: string, postalCode: string, country: string, website: string) => {
+    setDoc(getDocRef(), {
+        [`${dbKeys.email}`]: email,
+        [`${dbKeys.firstName}`]: firstName,
+        [`${dbKeys.surname}`]: surname,
+        [`${dbKeys.phoneNumber}`]: phoneNumber,
+        [`${dbKeys.address}`]: address,
+        [`${dbKeys.locality}`]: locality,
+        [`${dbKeys.region}`]: region,
+        [`${dbKeys.postalCode}`]: postalCode,
+        [`${dbKeys.country}`]: country,
+        [`${dbKeys.website}`]: website
+    })
 }
 
-export const fetchDataAndConvertToContactObject = async (uid: string) => {
-    var data = fetchDataForUser(uid);
+export const fetchDataForUser = (uid: string) => {
+    return doc(db, 'users', uid);
 }
 
 export const createContactFromScan = async (uid: string) => {

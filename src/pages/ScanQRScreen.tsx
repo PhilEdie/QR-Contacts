@@ -3,9 +3,8 @@ import { IonButton, IonContent, IonHeader, IonIcon, IonItem, IonPage, IonProgres
 import { DocumentData, DocumentSnapshot } from "firebase/firestore";
 import { alertCircle, checkmarkCircle } from "ionicons/icons";
 import { useState } from "react";
-import { createContactFromScan } from "../DataAccessModel";
+import { createContactFromScan } from "../ModelAndController/DataAccessController";
 import ContactInfoIonList from "./ContactInfoIonList";
-
 
 const ScanQRScreen = () => {
 
@@ -62,7 +61,6 @@ const ScanQRScreen = () => {
                 {state === "error" && <IonButton onClick={getUidFromQRCode} expand="block">Scan Again</IonButton>}
             </IonContent>
         </IonPage>
-
     )
 }
 

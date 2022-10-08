@@ -1,9 +1,8 @@
 import { IonButton, IonContent, IonHeader, IonInput, IonItem, IonLabel, IonPage, IonProgressBar, IonTitle, IonToolbar } from '@ionic/react';
 import { useState } from 'react';
-import { useHistory } from 'react-router';
 import { Link } from 'react-router-dom';
-import { resetPassword } from '../Authentication';
-import { validEmail } from '../ValidateLogin';
+import { resetPassword } from '../ModelAndController/AuthenticationController';
+import { validEmail } from '../ModelAndController/ValidateLoginController';
 
 
 const ResetPasswordScreen = () => {

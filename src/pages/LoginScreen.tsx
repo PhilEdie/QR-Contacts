@@ -1,10 +1,10 @@
 
-import { useCallback, useState } from 'react';
-import { loginUser } from "../Authentication";
-import { auth } from "../firebase.config.js";
-import { IonButton, IonContent, IonHeader, IonInput, IonItem, IonItemDivider, IonLabel, IonList, IonNavLink, IonPage, IonProgressBar, IonRouterLink, IonText, IonTitle, IonToolbar } from '@ionic/react';
-import { Redirect, useHistory } from 'react-router';
+
+import { IonButton, IonContent, IonHeader, IonInput, IonItem, IonLabel, IonList, IonPage, IonProgressBar, IonTitle, IonToolbar } from '@ionic/react';
+import { useState } from 'react';
+import { useHistory } from 'react-router';
 import { Link } from 'react-router-dom';
+import { loginUser } from "../ModelAndController/AuthenticationController";
 
 
 const LoginScreen = () => {
@@ -48,7 +48,6 @@ const LoginScreen = () => {
     };
 
     return (
-
         <IonPage>
             <IonHeader>
                 <IonToolbar>
@@ -59,7 +58,6 @@ const LoginScreen = () => {
                 {
                     state == 'loading' ? <IonProgressBar type="indeterminate"></IonProgressBar> : null
                 }
-
                 <IonList>
                     <IonItem>
                         <IonLabel position="stacked">Email</IonLabel>
@@ -72,19 +70,14 @@ const LoginScreen = () => {
                     </IonItem>
 
                     <IonButton expand="block" type="submit" onClick={() => handleSubmit()}>Submit</IonButton>
-
-
                     <IonItem>
                         <IonLabel position='stacked'>Don't have an account?</IonLabel>
                         <Link to='/register'>Register</Link>
                     </IonItem>
-
-
                     <IonItem>
                         <IonLabel position='stacked'>Forgot your password?</IonLabel>
                         <Link to='/reset-password'>Reset Password</Link>
                     </IonItem>
-
                 </IonList>
             </IonContent>
         </IonPage>

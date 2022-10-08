@@ -1,10 +1,9 @@
 import { IonButton, IonContent, IonHeader, IonInput, IonItem, IonLabel, IonList, IonPage, IonProgressBar, IonText, IonTitle, IonToolbar, withIonLifeCycle } from '@ionic/react';
-import { setDoc } from 'firebase/firestore';
 import { useEffect, useState } from 'react';
-import { RouteComponentProps, useHistory } from 'react-router';
-import { logoutUser } from '../Authentication';
-import { dbKeys, get, getDocRef } from '../DataAccessModel';
+import { RouteComponentProps } from 'react-router';
 import { auth } from '../firebase.config';
+import { logoutUser } from '../ModelAndController/AuthenticationController';
+import { dbKeys, get, updateContactInfo } from '../ModelAndController/DataAccessController';
 
 const SettingsScreen: React.FC<RouteComponentProps> = ({ history }) => {
 
@@ -43,27 +42,13 @@ const SettingsScreen: React.FC<RouteComponentProps> = ({ history }) => {
 
   const handleSubmit = async () => {
     setState("loading");
-    updateContactInfo().then(() => {
+    updateContactInfo(email, firstName, surname, phoneNumber, address, locality, region, postalCode, country, website).then(() => {
       alert("Info updated.");
       setState("success");
     }).catch((error) => {
       alert("An error occured.");
       console.error(error);
       setState("error");
-    })
-  }
-
-  const updateContactInfo = async () => {
-    setDoc(getDocRef(), {
-      [`${dbKeys.firstName}`]: firstName,
-      [`${dbKeys.surname}`]: surname,
-      [`${dbKeys.phoneNumber}`]: phoneNumber,
-      [`${dbKeys.address}`]: address,
-      [`${dbKeys.locality}`]: locality,
-      [`${dbKeys.region}`]: region,
-      [`${dbKeys.postalCode}`]: postalCode,
-      [`${dbKeys.country}`]: country,
-      [`${dbKeys.website}`]: website
     })
   }
 
@@ -96,7 +81,6 @@ const SettingsScreen: React.FC<RouteComponentProps> = ({ history }) => {
     )
   }
 
-
   return (
     <IonPage>
       <IonHeader>
@@ -118,17 +102,14 @@ const SettingsScreen: React.FC<RouteComponentProps> = ({ history }) => {
             <IonLabel position="stacked">Email</IonLabel>
             <IonInput value={email} type={"email"} required={true} onIonChange={e => setSurname(e.detail.value!)} disabled></IonInput>
           </IonItem>
-
           <IonItem>
             <IonLabel position="stacked">First Name</IonLabel>
             <IonInput value={firstName} type={"text"} required={true} onIonChange={e => setFirstName(e.detail.value!)}></IonInput>
           </IonItem>
-
           <IonItem>
             <IonLabel position="stacked">Surname</IonLabel>
             <IonInput value={surname} type={"text"} required={true} onIonChange={e => setSurname(e.detail.value!)}></IonInput>
           </IonItem>
-
           <IonItem>
             <IonLabel position="stacked">Phone Number</IonLabel>
             <IonInput value={phoneNumber} type={"text"} required={true} onIonChange={e => setPhoneNumber(e.detail.value!)}></IonInput>

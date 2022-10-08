@@ -1,7 +1,11 @@
+/**
+ * A component which displays all contact information from a specific Document Snapshot in a list format.
+ */
+
 import { IonItem, IonLabel, IonList, IonText } from '@ionic/react';
 import { DocumentData, DocumentSnapshot } from 'firebase/firestore';
 import { useEffect, useState } from 'react';
-import { dbKeys } from '../DataAccessModel';
+import { dbKeys } from '../ModelAndController/DataAccessController';
 
 interface ContactInfoIonListProps {
   docSnap: DocumentSnapshot<DocumentData>

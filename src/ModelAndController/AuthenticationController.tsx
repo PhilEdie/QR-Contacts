@@ -8,8 +8,8 @@ import {
     sendPasswordResetEmail, signInWithEmailAndPassword,
     signOut, updateProfile
 } from 'firebase/auth';
-import { auth } from './firebase.config';
-import { createProfile } from './DataAccessModel';
+import { auth } from '../firebase.config';
+import { createProfile } from './DataAccessController';
 
 
 export const registerUser = async (name: string, email: string, password: string) => {

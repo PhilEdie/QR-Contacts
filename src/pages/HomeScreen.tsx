@@ -1,3 +1,7 @@
+/**
+ * Represents the home screen of the app after the user has logged in. The user can navigate between three tabs.
+ */
+
 import {
     IonIcon,
     IonLabel, IonPage, IonRouterOutlet,
@@ -8,11 +12,9 @@ import {
 import { IonReactRouter } from '@ionic/react-router';
 import { qrCodeOutline, scanOutline, settingsOutline } from 'ionicons/icons';
 import { Redirect, Route, RouteComponentProps } from 'react-router-dom';
-import { auth } from "../firebase.config";
 import QRScreen from './QRScreen';
 import ScanQRScreen from "./ScanQRScreen";
 import SettingsScreen from './SettingsScreen';
-
 
 const HomeScreen: React.FC<RouteComponentProps> = ({ history, match }) => {
     return (

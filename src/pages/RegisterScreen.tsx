@@ -1,9 +1,8 @@
-import { IonButton, IonContent, IonHeader, IonInput, IonItem, IonItemDivider, IonLabel, IonList, IonPage, IonProgressBar, IonTitle, IonToolbar } from '@ionic/react';
+import { IonButton, IonContent, IonHeader, IonInput, IonItem, IonLabel, IonList, IonPage, IonProgressBar, IonTitle, IonToolbar } from '@ionic/react';
 import { useState } from 'react';
-import { useHistory } from 'react-router';
 import { Link } from 'react-router-dom';
-import { registerUser } from "../Authentication";
-import { validInputs } from "../ValidateLogin"
+import { registerUser } from "../ModelAndController/AuthenticationController";
+import { validInputs } from "../ModelAndController/ValidateLoginController";
 
 
 const RegisterScreen = () => {
@@ -44,7 +43,6 @@ const RegisterScreen = () => {
     };
 
     return (
-
         <IonPage>
             <IonHeader>
                 <IonToolbar>
@@ -58,30 +56,23 @@ const RegisterScreen = () => {
                         <IonLabel position="stacked">First Name</IonLabel>
                         <IonInput value={firstName} type={"text"} required={true} onIonChange={e => setFirstName(e.detail.value!)}></IonInput>
                     </IonItem>
-
-
                     <IonItem>
                         <IonLabel position="stacked">Email</IonLabel>
                         <IonInput value={email} type={"email"} required={true} onIonChange={e => setEmail(e.detail.value!)}></IonInput>
                     </IonItem>
-
-
                     <IonItem>
                         <IonLabel position="stacked">Password</IonLabel>
                         <IonInput value={password} type={"password"} required={true} onIonChange={e => setPassword(e.detail.value!)}></IonInput>
                     </IonItem>
-
                     <IonItem>
                         <IonLabel position="stacked">Confirm Password</IonLabel>
                         <IonInput value={confirmPassword} type={"password"} required={true} onIonChange={e => setConfirmPassword(e.detail.value!)}></IonInput>
                     </IonItem>
-
                     <IonButton expand="block" type="submit" onClick={() => handleSubmit()}>Submit</IonButton>
                     <IonItem>
                         <IonLabel position="stacked">Already have an account?</IonLabel>
                         <Link to='/login'>Login</Link>
                     </IonItem>
-
                 </IonList>
             </IonContent>
         </IonPage>
