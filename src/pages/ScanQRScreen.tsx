@@ -43,12 +43,14 @@ const ScanQRScreen = () => {
                 </IonToolbar>
             </IonHeader>
             <IonContent fullscreen>
-                <IonItem>
-                    <IonText>
-                        Using your phone camera, scan another user's QR code. Their contact details
-                        will be automatically saved to your phone contacts list.
-                    </IonText>
-                </IonItem>
+                {(state === "ready" || state === "loading") &&
+                    <IonItem>
+                        <IonText>
+                            Using your phone camera, scan another user's QR code. Their contact details
+                            will be automatically saved to your phone contacts list.
+                        </IonText>
+                    </IonItem>
+                }
 
                 {state === "ready" && <IonButton onClick={getUidFromQRCode} expand="block">Scan QR Code</IonButton>}
                 {state === "loading" && <IonProgressBar type="indeterminate"></IonProgressBar>}
